@@ -31,23 +31,26 @@ const SearchPage = () => {
       <div className="flex flex-col md:flex-row justify-between gap-10">
         <FilterPage />
         <div className="flex-1">
-          {/* Search Input Field  */}
-          <div className="flex items-center gap-2">
-            <Input
-              type="text"
-              value={searchQuery}
-              placeholder="Search by restaurant & cuisines"
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Button
-              onClick={() =>
-                searchRestaurant(params.text!, searchQuery, appliedFilter)
-              }
-              className="bg-green-500 hover:bg-green-600"
-            >
-              Search
-            </Button>
-          </div>
+          <form action="">
+            <div className="flex items-center gap-2">
+              <Input
+                type="text"
+                value={searchQuery}
+                placeholder="Search by restaurant & cuisines"
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Button
+                onClick={() =>
+                  searchRestaurant(params.text!, searchQuery, appliedFilter)
+                }
+                type="submit"
+                disabled={!!!searchQuery.trim()}
+                className="bg-green-500 hover:bg-green-600"
+              >
+                Search
+              </Button>
+            </div>
+          </form>
           {/* Searched Items display here  */}
           <div>
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2 my-3">
@@ -192,19 +195,21 @@ const SearchPageSkeleton = () => {
 
 const NoResultFound = ({ searchText }: { searchText: string }) => {
   return (
-    <div className="text-center">
-      <h1 className="text-2xl font-semibold text-gray-700 dark:text-gray-200">
-        No results found
-      </h1>
-      <p className="mt-2 text-gray-500 dark:text-gray-400">
-        We couldn't find any results for "{searchText}". <br /> Try searching
-        with a different term.
-      </p>
-      <Link to="/">
-        <Button className="bg-green-500 hover:bg-green-600">
-          Go Back to Home
-        </Button>
-      </Link>
+    <div className="p-5 sm:p-12 h-full w-full">
+      <div className="text-center">
+        <h1 className="text-2xl font-semibold text-gray-700 dark:text-gray-200">
+          No results found
+        </h1>
+        <p className="mt-2 text-gray-500 dark:text-gray-400">
+          We couldn't find any results for "{searchText}". <br /> Try searching
+          with a different term.
+        </p>
+        <Link to="/">
+          <Button className="bg-green-500 my-5 hover:bg-green-600">
+            Go Back to Home
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };

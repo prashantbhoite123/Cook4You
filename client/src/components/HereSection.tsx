@@ -20,22 +20,27 @@ const HereSection = () => {
             you.
           </p>
         </div>
-        <div className="relative flex items-center gap-2">
-          <Input
-            type="text"
-            value={searchText}
-            placeholder="Search restaurant by name, city & country"
-            onChange={(e) => setSearchText(e.target.value)}
-            className="pl-10 shadow-lg"
-          />
-          <Search className="text-gray-500 absolute inset-y-2 left-2" />
-          <Button
-            onClick={() => navigate(`/search/${searchText}`)}
-            className="bg-green-500 hover:bg-green-600"
-          >
-            Search
-          </Button>
-        </div>
+        <form action="">
+          <div className="relative flex items-center gap-2">
+            <Input
+              type="text"
+              value={searchText}
+              placeholder="Search restaurant by name, city & country"
+              onChange={(e) => setSearchText(e.target.value)}
+              className="pl-10 shadow-lg"
+              required
+            />
+            <Search className="text-gray-500 absolute inset-y-2 left-2" />
+            <Button
+              type="submit"
+              onClick={() => navigate(`/search/${searchText}`)}
+              className="bg-green-500 hover:bg-green-600"
+              disabled={!!!searchText.trim()}
+            >
+              Search
+            </Button>
+          </div>
+        </form>
       </div>
       <div>
         <img
