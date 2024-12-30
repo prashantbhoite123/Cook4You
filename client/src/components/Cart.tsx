@@ -17,15 +17,24 @@ import { CartItem } from "@/types/cartType";
 
 const Cart = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const { cart, decrementQuantity, incrementQuantity } = useCartStore();
+  const {
+    cart,
+    decrementQuantity,
+    incrementQuantity,
+    clearCart,
+    removeFromTheCart,
+  } = useCartStore();
 
   let totalAmount = cart.reduce((acc, ele) => {
     return acc + ele.price * ele.quantity;
   }, 0);
+
   return (
     <div className="flex flex-col max-w-7xl mx-auto my-10">
       <div className="flex justify-end">
-        <Button variant="link">Clear All</Button>
+        <Button variant="link" onClick={() => clearCart()}>
+          Clear All
+        </Button>
       </div>
       <Table>
         <TableHeader>
@@ -43,7 +52,11 @@ const Cart = () => {
             <TableRow>
               <TableCell>
                 <Avatar>
-                  <AvatarImage src={item.image} alt="" />
+                  <AvatarImage
+                    src={item.image}
+                    alt=""
+                    className="object-cover"
+                  />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
               </TableCell>
@@ -55,7 +68,7 @@ const Cart = () => {
                     onClick={() => decrementQuantity(item._id)}
                     size={"icon"}
                     variant={"outline"}
-                    className="rounded-full bg-gray-200"
+                    className="rounded-full bg-gray-200 dark:bg-gray-900"
                   >
                     <Minus />
                   </Button>
@@ -79,7 +92,11 @@ const Cart = () => {
               </TableCell>
               <TableCell>{item.price * item.quantity}</TableCell>
               <TableCell className="text-right">
-                <Button size={"sm"} className="bg-green-500 hover:bg-green-600">
+                <Button
+                  onClick={() => removeFromTheCart(item._id)}
+                  size={"sm"}
+                  className="bg-green-500 hover:bg-green-600"
+                >
                   Remove
                 </Button>
               </TableCell>

@@ -81,7 +81,7 @@ const Restaurant = () => {
       }
     };
     fetchRestaurant();
-    console.log(restaurant);
+    
   }, []);
 
   return (

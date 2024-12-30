@@ -40,6 +40,7 @@ import { Separator } from "./ui/separator";
 import { useUserStore } from "@/store/useUserStore";
 import { useCartStore } from "@/store/useCartStore";
 import { useThemeStore } from "@/store/useThemeStore";
+import { useRestaurantStore } from "@/store/useRestaurantStore";
 
 const Navbar = () => {
   const { user, loading, logout } = useUserStore();
@@ -50,7 +51,12 @@ const Navbar = () => {
     <div className="max-w-7xl mx-auto">
       <div className="flex items-center justify-between h-14">
         <Link to="/">
-          <h1 className="font-bold md:font-extrabold text-2xl">PatelEats</h1>
+          <h1 className="font-bold md:font-extrabold text-2xl">
+            Cook4
+            <span className="font-bold md:font-extrabold text-2xl text-green-500">
+              You
+            </span>
+          </h1>
         </Link>
         <div className="hidden md:flex items-center gap-10">
           <div className="hidden md:flex items-center gap-6">
@@ -145,12 +151,14 @@ export default Navbar;
 const MobileNavbar = () => {
   const { user, logout, loading } = useUserStore();
   const { setTheme } = useThemeStore();
+  const { restaurant } = useRestaurantStore();
+
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button
           size={"icon"}
-          className="rounded-full bg-gray-200 text-black hover:bg-gray-200"
+          className="rounded-full bg-gray-200 text-black hover:bg-green-500"
           variant="outline"
         >
           <Menu size={"18"} />
@@ -158,7 +166,10 @@ const MobileNavbar = () => {
       </SheetTrigger>
       <SheetContent className="flex flex-col">
         <SheetHeader className="flex flex-row items-center justify-between mt-2">
-          <SheetTitle>PatelEats</SheetTitle>
+          <SheetTitle>
+            Cook4
+            <span className="text-green-500">You</span>
+          </SheetTitle>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">
@@ -181,21 +192,21 @@ const MobileNavbar = () => {
         <SheetDescription className="flex-1">
           <Link
             to="/profile"
-            className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+            className="flex items-center gap-4 hover:bg-green-500 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
           >
             <User />
             <span>Profile</span>
           </Link>
           <Link
             to="/order/status"
-            className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+            className="flex items-center gap-4 hover:bg-green-500 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
           >
             <HandPlatter />
             <span>Order</span>
           </Link>
           <Link
             to="/cart"
-            className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+            className="flex items-center gap-4 hover:bg-green-500 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
           >
             <ShoppingCart />
             <span>Cart (0)</span>
@@ -204,21 +215,21 @@ const MobileNavbar = () => {
             <>
               <Link
                 to="/admin/menu"
-                className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+                className="flex items-center gap-4 hover:bg-green-500 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
               >
                 <SquareMenu />
                 <span>Menu</span>
               </Link>
               <Link
                 to="/admin/restaurant"
-                className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+                className="flex items-center gap-4 hover:bg-green-500 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
               >
                 <UtensilsCrossed />
                 <span>Restaurant</span>
               </Link>
               <Link
                 to="/admin/orders"
-                className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+                className="flex items-center gap-4 hover:bg-green-500 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
               >
                 <PackageCheck />
                 <span>Restaurant Orders</span>
@@ -232,7 +243,7 @@ const MobileNavbar = () => {
               <AvatarImage src={user?.profilePicture} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <h1 className="font-bold">Patel Mernstack</h1>
+            <h1 className="font-bold">{restaurant?.restaurantName}</h1>
           </div>
           <SheetClose asChild>
             {loading ? (

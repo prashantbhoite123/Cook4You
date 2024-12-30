@@ -149,7 +149,10 @@ const AddMenu = () => {
                     Please wait
                   </Button>
                 ) : (
-                  <Button className="bg-green-500 hover:bg-green-600">
+                  <Button
+                    onClick={() => setOpen(!open)}
+                    className="bg-green-500 hover:bg-green-600"
+                  >
                     Submit
                   </Button>
                 )}
@@ -167,7 +170,7 @@ const AddMenu = () => {
               className="md:h-24 md:w-24 h-16 w-full object-cover rounded-lg"
             />
             <div className="flex-1">
-              <h1 className="text-lg font-semibold text-gray-800">
+              <h1 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
                 {menu.name}
               </h1>
               <p className="text-sm tex-gray-600 mt-1">{menu.description}</p>

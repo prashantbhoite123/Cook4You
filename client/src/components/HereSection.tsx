@@ -13,7 +13,8 @@ const HereSection = () => {
       <div className="flex flex-col gap-10 md:w-[40%]">
         <div className="flex flex-col gap-5">
           <h1 className="font-bold md:font-extrabold md:text-5xl text-4xl">
-            Order Food anytime & anywhere
+            Order Food anytime &{" "}
+            <span className="text-green-500">anywhere</span>
           </h1>
           <p className="text-gray-500">
             Hey! Our Delicios food is waiting for you, we are always near to
@@ -46,7 +47,7 @@ const HereSection = () => {
         <img
           src={HereImage}
           alt=""
-          className="object-cover w-full max-h-[500px]"
+          className="object-cover  w-full max-h-[500px]"
         />
       </div>
     </div>
