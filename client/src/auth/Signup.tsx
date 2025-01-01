@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { SignupInputState, userSignupSchema } from "@/schema/userSchema";
-import { useUserStore } from "@/store/useUserStore";
-import { Loader2, LockKeyhole, Mail, PhoneOutgoing, User } from "lucide-react";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
+import { SignupInputState, userSignupSchema } from "@/schema/userSchema"
+import { useUserStore } from "@/store/useUserStore"
+import { Loader2, LockKeyhole, Mail, PhoneOutgoing, User } from "lucide-react"
+import { ChangeEvent, FormEvent, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 
 const Signup = () => {
   const [input, setInput] = useState<SignupInputState>({
@@ -13,31 +13,31 @@ const Signup = () => {
     email: "",
     password: "",
     contact: "",
-  });
-  const [errors, setErrors] = useState<Partial<SignupInputState>>({});
-  const { signup, loading } = useUserStore();
-  const navigate = useNavigate();
+  })
+  const [errors, setErrors] = useState<Partial<SignupInputState>>({})
+  const { signup, loading } = useUserStore()
+  const navigate = useNavigate()
   const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
-  };
+    const { name, value } = e.target
+    setInput({ ...input, [name]: value })
+  }
   const loginSubmitHandler = async (e: FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const result = userSignupSchema.safeParse(input);
+    const result = userSignupSchema.safeParse(input)
     if (!result.success) {
-      const fieldErrors = result.error.formErrors.fieldErrors;
-      setErrors(fieldErrors as Partial<SignupInputState>);
-      return;
+      const fieldErrors = result.error.formErrors.fieldErrors
+      setErrors(fieldErrors as Partial<SignupInputState>)
+      return
     }
 
     try {
-      await signup(input);
-      navigate("/verify-email");
+      await signup(input)
+      navigate("/verify-email")
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -46,7 +46,7 @@ const Signup = () => {
         className="md:p-8 w-full max-w-md rounded-lg md:border border-gray-200 mx-4"
       >
         <div className="mb-4">
-          <h1 className="font-bold text-2xl">PatelEats</h1>
+          <h1 className="font-bold text-2xl">Cook4You</h1>
         </div>
         <div className="mb-4">
           <div className="relative">
@@ -132,7 +132,7 @@ const Signup = () => {
         </p>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup
