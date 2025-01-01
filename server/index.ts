@@ -41,5 +41,7 @@ app.use("*", (_, res) => {
 
 app.listen(PORT, () => {
   connectDB();
+  console.log("thsese are the memory usage: ", process.memoryUsage());
   console.log(`Server listen at port ${PORT}`);
 });
+
